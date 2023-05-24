@@ -1,0 +1,39 @@
+## ~/.bashrc specific ##
+
+  # Set editor for oc commands
+  export EDITOR=/usr/bin/vim
+
+  # Set bash history size
+  export HISTSIZE=10000
+
+  # Set bash history timestamps
+  export HISTTIMEFORMAT="%F %T "
+
+  # Set pager not to clear on exit
+  export LESS='-X'
+
+  # Append to .bash_history
+  PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -n"
+  
+  # make and change to directory
+  mcd (){
+    mkdir -pv "$1"
+    cd "$1" || return
+  }
+
+  # Show which block devices are mounted
+  mnt (){
+    mount | awk '$1 ~ /\/dev/ { print $1,$3; }' | column -t | sort ;
+  }
+
+  # create, switch to, push new git branch
+  gnb (){
+    git checkout -b "$1"
+    git push -u origin "$1"
+  }
+
+## ~/.vimrc specific ##
+
+  # configure autoindentation for yaml in vim
+  autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
+  set cursorline
